@@ -28,4 +28,7 @@ public class OrderEntity extends BaseEntity {
     @ManyToOne()
     @JoinColumn(name = "customer_id", nullable = false) // foreign key
     private CustomerEntity customer;
+
+    // status
+    private String status;
 }

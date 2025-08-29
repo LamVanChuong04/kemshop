@@ -37,4 +37,8 @@ public class CustomerEntity extends BaseEntity{
     @OneToMany(mappedBy ="customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderEntity> orders;
 
+    // n nguoi --> 1 vai tro
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private RoleEnum role;
 }

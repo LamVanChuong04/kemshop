@@ -25,10 +25,8 @@ public class ProductEntity extends BaseEntity{
     private String productName;
 
     @Column(name = "product_price", nullable = false)
-    private BigDecimal productPrice;
+    private double productPrice;
 
-    @Column(name = "product_category", nullable = false)
-    private String productCategory;
 
     @Column(name = "product_description",nullable = false)
     private String productDescription;
@@ -40,5 +38,11 @@ public class ProductEntity extends BaseEntity{
             joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "order_id")
     )
     private List<OrderEntity> orders;
+    @Column(name = "product_quantity", nullable = false)
+    private Integer quantity;
 
+    // n product --> 1 category
+    @ManyToOne()
+    @JoinColumn(name = "category_id",  nullable = false)
+    private CategoryEntity category;
 }
