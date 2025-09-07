@@ -41,4 +41,9 @@ public class CustomerEntity extends BaseEntity{
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private RoleEnum role;
+
+    // 1 nguoi - 1 gio hang
+
+    @OneToOne(mappedBy = "customer")
+    private CartEntity cart;
 }

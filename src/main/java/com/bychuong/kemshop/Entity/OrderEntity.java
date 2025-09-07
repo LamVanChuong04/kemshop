@@ -31,4 +31,8 @@ public class OrderEntity extends BaseEntity {
 
     // status
     private String status;
+    //
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private PaymentEntity payment;
+
 }

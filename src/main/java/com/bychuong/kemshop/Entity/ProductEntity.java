@@ -45,4 +45,8 @@ public class ProductEntity extends BaseEntity{
     @ManyToOne()
     @JoinColumn(name = "category_id",  nullable = false)
     private CategoryEntity category;
+
+    // 1 san pham -- n gio hang
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CartItemEntity> cartItems;
 }
