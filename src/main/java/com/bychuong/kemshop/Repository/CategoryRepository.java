@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.bychuong.kemshop.Entity.CategoryEntity;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<CategoryEntity, Long> {
+public interface CategoryRepository extends JpaRepository<CategoryEntity, Integer> {
     
 }

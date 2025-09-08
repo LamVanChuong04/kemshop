@@ -17,4 +17,10 @@ public class CategoryServiceImp implements CategoryService{
     public void saveCategory(CategoryEntity categoryEntity) {
         categoryRepository.save(categoryEntity);
     }
+    // find category by id
+    @Override
+    public CategoryEntity getCategoryById(Integer id) {
+        return categoryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy danh mục với id = " + id));
+    }
 }

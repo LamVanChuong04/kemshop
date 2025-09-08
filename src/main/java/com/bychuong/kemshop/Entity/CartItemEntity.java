@@ -1,9 +1,17 @@
 package com.bychuong.kemshop.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "cart_items")
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class CartItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -33,6 +33,7 @@ public class ProductEntity extends BaseEntity{
 
     @Column(name = "product_image", nullable = false)
     private String productImage;
+    // n product -- n order
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable( name = "product_order",
             joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "order_id")

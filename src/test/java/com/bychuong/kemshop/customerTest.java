@@ -29,7 +29,10 @@ public class customerTest {
     @Test
     public void test1() {
         CategoryEntity c = new CategoryEntity();
-        c.setCategoryName("Kem vị Vani");
+        
+        c.setCategoryName("Kem hộp 450g");
+        
         categoryServiceImp.saveCategory(c);
+        
     }
 }

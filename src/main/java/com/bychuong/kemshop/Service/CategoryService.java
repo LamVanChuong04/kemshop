@@ -8,4 +8,7 @@ import com.bychuong.kemshop.Entity.CategoryEntity;
 public interface CategoryService {
     // save category
     public void saveCategory(CategoryEntity categoryEntity);
+
+    // find category by id
+    public CategoryEntity getCategoryById(Integer id);
 }
