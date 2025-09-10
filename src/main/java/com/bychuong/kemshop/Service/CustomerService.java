@@ -8,5 +8,6 @@ import com.bychuong.kemshop.Entity.CustomerEntity;
 public interface CustomerService {
     // save customer
     public void saveCustomer(CustomerEntity customerEntity);
+    // find customer by email
     
 } 

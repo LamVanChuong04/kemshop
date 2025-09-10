@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "cart_items")
+@Table(name = "cart_details")
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartItemEntity {
+public class CartDetailEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

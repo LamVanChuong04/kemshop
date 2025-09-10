@@ -9,11 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bychuong.kemshop.DTO.ProductDTO;
-import com.bychuong.kemshop.Entity.ProductEntity;
-import com.bychuong.kemshop.Repository.ProductRepository;
+
 import com.bychuong.kemshop.Service.Impl.ProductServiceImp;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 @RestController
@@ -40,8 +41,18 @@ public class ProductController {
         productServiceImp.createProduct(dto);
         return "Thêm sản phẩm thành công";
     }
-
+    // xóa sản phẩm
+    @GetMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable Long id) {
+        productServiceImp.deleteProduct(id);
+        return "Xóa sản phẩm thành công";
+    }
     
-
+    // cập nhật sản phẩm
+    @PutMapping("update/{id}")
+    public String putMethodName(@PathVariable String id, @RequestBody ProductDTO product) {
+        productServiceImp.updateProduct(Long.parseLong(id), product);
+        return "Cập nhật sản phẩm thành công";
+    }
     
 }

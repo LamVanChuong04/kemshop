@@ -28,5 +28,8 @@ public class CartEntity extends BaseEntity {
     // 1 gio hang-- n san pham
 
     @OneToMany(mappedBy = "cart")
-    private List<CartItemEntity> cartItem;
+    private List<CartDetailEntity> cartItem;
+
+    // sum
+    private double sum;
 }

@@ -1,5 +1,7 @@
 package com.bychuong.kemshop.Service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.bychuong.kemshop.Entity.CategoryEntity;
@@ -11,4 +13,6 @@ public interface CategoryService {
 
     // find category by id
     public CategoryEntity getCategoryById(Integer id);
+    // get all categories
+    public List<CategoryEntity> getAllCategories();
 }

@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
+
 import java.util.List;
 
 @Table(name = "products")
@@ -33,12 +33,12 @@ public class ProductEntity extends BaseEntity{
 
     @Column(name = "product_image", nullable = false)
     private String productImage;
-    // n product -- n order
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable( name = "product_order",
-            joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "order_id")
-    )
-    private List<OrderEntity> orders;
+    // // n product -- n order
+    // @ManyToMany(fetch = FetchType.EAGER)
+    // @JoinTable( name = "product_order",
+    //         joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "order_id")
+    // )
+    
     @Column(name = "product_quantity", nullable = false)
     private Integer quantity;
 
@@ -49,5 +49,9 @@ public class ProductEntity extends BaseEntity{
 
     // 1 san pham -- n gio hang
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CartItemEntity> cartItems;
+    private List<CartDetailEntity> cartItems;
+
+    // 1 san pham -- n order detail
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderDetailEntity> orderDetails;
 }

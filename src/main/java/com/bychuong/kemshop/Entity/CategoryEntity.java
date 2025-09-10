@@ -8,6 +8,8 @@ import lombok.Setter;
 
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "categories")
 @Setter
@@ -27,5 +29,6 @@ public class CategoryEntity extends BaseEntity{
     // 1 category --> n product
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<ProductEntity> products;
 }

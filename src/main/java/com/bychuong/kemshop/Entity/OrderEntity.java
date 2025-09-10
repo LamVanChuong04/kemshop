@@ -20,8 +20,8 @@ public class OrderEntity extends BaseEntity {
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToMany(mappedBy = "orders")
-    private List<ProductEntity> productEntity;
+    // @ManyToMany(mappedBy = "orders")
+    // private List<ProductEntity> productEntity;
 
 
     // 1 nguoi --> n don hang
@@ -35,4 +35,23 @@ public class OrderEntity extends BaseEntity {
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private PaymentEntity payment;
 
+    @OneToMany(mappedBy = "order")
+    List<OrderDetailEntity> orderDetails;
+    // người nhận
+    @Column(name = "receiver_name", nullable = false)
+    private String receiverName;
+    // sdt người nhận
+    @Column(name = "receiver_phone", nullable = false)
+    private String receiverPhone;
+    // địa chỉ người nhận
+    @Column(name = "receiver_address", nullable = false)
+    private String receiverAddress;
+    // tông tiền
+    @Column(name = "total_price", nullable = false)
+    private double totalAmount;
+
+    // trạng thái
+    @Enumerated(EnumType.STRING)
+    @Column(name = "order_status", nullable = false)
+    private OrderStatus orderStatus;
 }
