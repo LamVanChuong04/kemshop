@@ -2,6 +2,7 @@ package com.bychuong.kemshop.Controller;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,7 +38,7 @@ public class ProductController {
     }
     // thêm sản phẩm
     @PostMapping("/create-product")
-    public String createProduct(@RequestBody ProductDTO dto) {
+    public String createProduct(@Valid @RequestBody ProductDTO dto) {
         productServiceImp.createProduct(dto);
         return "Thêm sản phẩm thành công";
     }

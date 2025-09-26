@@ -1,6 +1,7 @@
 package com.bychuong.kemshop.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,13 +22,14 @@ public class ProductEntity extends BaseEntity{
     @Column(name = "product_id")
     private Long id;
 
+    @NotBlank(message = "Tên sản phẩm không được bỏ trống")
     @Column(name = "product_name",nullable = false, unique = true)
     private String productName;
 
     @Column(name = "product_price", nullable = false)
     private double productPrice;
 
-
+    @NotBlank(message = "Mô tả không được để trống")
     @Column(name = "product_description",nullable = false)
     private String productDescription;
 

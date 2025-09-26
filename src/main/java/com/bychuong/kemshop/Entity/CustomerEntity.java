@@ -1,6 +1,8 @@
 package com.bychuong.kemshop.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,14 +23,18 @@ public class CustomerEntity extends BaseEntity{
     private Long id;
     @Column(name = "customer_name")
     private String customerName;
+
+    @Email(message = "Email khong hop le.")
     @Column(name = "customer_email", nullable = false, unique = true)
     private String customerEmail;
+
     @Column(name = "customer_phone")
     private String customerPhone;
     @Column(name = "customer_address")
     private String customerAddress;
     @Column(name = "customer_image")
     private String image;
+    @Min(value = 8, message = "Password phai tu 8 ki tu tro len.")
     @Column(name = "customer_password", nullable = false)
     private String password;
 
