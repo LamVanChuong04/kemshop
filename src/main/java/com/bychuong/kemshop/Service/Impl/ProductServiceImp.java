@@ -1,8 +1,13 @@
 package com.bychuong.kemshop.Service.Impl;
 
 import com.bychuong.kemshop.DTO.ProductDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
@@ -76,6 +81,11 @@ public class ProductServiceImp implements ProductService {
         product.setProductDescription(dto.getProductDescription());
         product.setProductImage(dto.getProductImage());
         product.setQuantity(dto.getQuantity());
+        
+        // check tên san phẩm đã tồn tại chưa
+        if (productRepository.existsByProductName(product.getProductName())) {
+            throw new IllegalArgumentException("Tên sản phẩm đã tồn tại, vui lòng nhập tên khác");
+        }
 
         // lấy category từ DB
         CategoryEntity category = categoryRepository.findById(dto.getCategoryId())
@@ -112,5 +122,17 @@ public class ProductServiceImp implements ProductService {
         // convert về DTO để trả ra
         return toDTO(saved);
     }
-    
+    // phân trang
+    @Override
+    public Page<ProductEntity> search(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo-1, pageSize);
+        return productRepository.search1(pageable);
+    }
+
+    // search and sort
+    @Override
+    public Page<ProductEntity> searchSort(int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo-1, pageSize, Sort.by("productPrice").ascending());
+        return productRepository.findAll(pageable);
+    }
 }

@@ -2,6 +2,7 @@ package com.bychuong.kemshop.Service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.bychuong.kemshop.DTO.ProductDTO;
@@ -21,5 +22,9 @@ public interface ProductService {
     // update product
     ProductDTO updateProduct(Long id, ProductDTO product);
 
-    
+    // phân trang
+    Page<ProductEntity> search(int pageNo, int pageSize);
+
+    // search and sort
+    Page<ProductEntity> searchSort(int pageNo, int pageSize);
 }

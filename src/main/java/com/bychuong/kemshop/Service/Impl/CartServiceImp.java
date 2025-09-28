@@ -42,7 +42,7 @@ public class CartServiceImp implements CartService {
                 // tạo mới cart
                 CartEntity otherCart = new CartEntity();
                 otherCart.setCustomer(user);
-                otherCart.setSum(1);;
+                otherCart.setSum(1);
 
                 cart = this.cartRepository.save(otherCart);
             }

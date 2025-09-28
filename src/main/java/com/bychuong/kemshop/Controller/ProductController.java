@@ -3,6 +3,9 @@ package com.bychuong.kemshop.Controller;
 import java.util.List;
 
 import jakarta.validation.Valid;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,11 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bychuong.kemshop.DTO.ProductDTO;
-
+import com.bychuong.kemshop.Entity.ProductEntity;
 import com.bychuong.kemshop.Service.Impl.ProductServiceImp;
+
+import ch.qos.logback.core.model.Model;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -22,9 +30,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping("/api/products")
 public class ProductController {
     private final ProductServiceImp productServiceImp;
-
-    public ProductController(ProductServiceImp productServiceImp) {
+    private final ModelMapper modelMapper;
+    public ProductController(ProductServiceImp productServiceImp, ModelMapper modelMapper) {
         this.productServiceImp = productServiceImp;
+        this.modelMapper = modelMapper;
     }
     // lấy tất cả sản phẩm
     @GetMapping
@@ -55,5 +64,21 @@ public class ProductController {
         productServiceImp.updateProduct(Long.parseLong(id), product);
         return "Cập nhật sản phẩm thành công";
     }
+    // phân trang
+    @GetMapping("/searchPage")
+    public ResponseEntity<?> getPage(@RequestParam(name = "pageNo") int pageNo, @RequestParam(name = "pageSize") int pageSize) {
+        Page<ProductEntity> page = productServiceImp.search(pageNo, pageSize);
+        return ResponseEntity.ok(page);
+    }
+
+    // search and sort
+    @GetMapping("/searchSort")
+    public ResponseEntity<?> getPageAndSort(@RequestParam(name = "pageNo") int pageNo, @RequestParam(name = "pageSize") int pageSize) {
+        Page<ProductEntity> page = productServiceImp.searchSort(pageNo, pageSize);
+        Page<ProductDTO> pageDto = page.map(product -> modelMapper.map(product, ProductDTO.class));
+
+        return ResponseEntity.ok(pageDto);
+    }
+    
     
 }
