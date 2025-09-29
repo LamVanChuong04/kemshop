@@ -52,4 +52,8 @@ public class CustomerEntity extends BaseEntity{
 
     @OneToOne(mappedBy = "customer")
     private CartEntity cart;
+
+    // token
+    @OneToMany(mappedBy = "customer")
+    private List<TokenEntity> tokens;
 }
