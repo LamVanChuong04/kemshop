@@ -7,6 +7,6 @@ import com.bychuong.kemshop.Entity.CustomerEntity;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Long> {
-    CustomerEntity findCustomerBycustomerEmail(String email);
+    CustomerEntity findBycustomerEmail(String email);
     
 } 

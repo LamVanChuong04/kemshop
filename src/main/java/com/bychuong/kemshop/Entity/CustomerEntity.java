@@ -3,11 +3,13 @@ package com.bychuong.kemshop.Entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -16,7 +18,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "customers")
-public class CustomerEntity extends BaseEntity{
+@Builder
+public class CustomerEntity extends BaseEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
@@ -34,13 +37,13 @@ public class CustomerEntity extends BaseEntity{
     private String customerAddress;
     @Column(name = "customer_image")
     private String image;
-    @Min(value = 8, message = "Password phai tu 8 ki tu tro len.")
+    //@Min(value = 8, message = "Password phai tu 8 ki tu tro len.")
     @Column(name = "customer_password", nullable = false)
     private String password;
 
 
     // 1 nguoi --> n don hang
-    @OneToMany(mappedBy ="customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderEntity> orders;
 
     // n nguoi --> 1 vai tro
@@ -56,4 +59,41 @@ public class CustomerEntity extends BaseEntity{
     // token
     @OneToMany(mappedBy = "customer")
     private List<TokenEntity> tokens;
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return customerEmail;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
 }
+
+

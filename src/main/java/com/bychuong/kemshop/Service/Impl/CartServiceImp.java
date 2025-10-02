@@ -33,7 +33,7 @@ public class CartServiceImp implements CartService {
     @Override
     public void handleAddProductToCart(String email, long productId) {
 
-        CustomerEntity user = this.customerRepository.findCustomerBycustomerEmail(email);
+        CustomerEntity user = this.customerRepository.findBycustomerEmail(email);
         if (user != null) {
             // check user đã có Cart chưa ? nếu chưa -> tạo mới
             CartEntity cart = this.cartRepository.findByCustomer(user);
