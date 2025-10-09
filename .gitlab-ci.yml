@@ -1,33 +1,30 @@
-stages:          # Các giai đoạn của pipeline
+
+stages:          # List of stages for jobs, and their order of execution
   - build
   - test
   - deploy
 
-build-job:       # Job 1: Build ứng dụng
+build-job:       # This job runs in the build stage, which runs first.
   stage: build
-  variables:
-    GIT_DEPTH: 1
-    GIT_STRATEGY: clone
-  tags:
-    - local     # (tag này phải trùng với tag bạn đặt khi tạo runner)
+  tags: 
+    - local
   script:
-    - echo "Building Spring Boot app..."
+    - echo "Compiling the code..."
     - mvn clean package -DskipTests
+    - echo "Compile complete."
 
-test-job:        # Job 2: Test ứng dụng
-  stage: test
-  tags:
+test-job:   # This job runs in the test stage.
+  stage: test    # It only starts when the job in the build stage completes successfully.
+  tags: 
     - local
   script:
-    - echo "Running unit tests..."
     - mvn test
+    - echo "Test successfull!"
 
-deploy-job:
-  stage: deploy
-  variables:
-    GIT_STRATEGY: none
-  tags:
+deploy-job:      # This job runs in the deploy stage.
+  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+  tags: 
     - local
   script:
-    - echo "Deploy successfull!"
-
+    - echo "Deploying application..."
+    - echo "Successfully!"
