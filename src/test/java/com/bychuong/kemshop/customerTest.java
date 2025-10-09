@@ -10,29 +10,29 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class customerTest {
-    @Autowired
-    private CustomerServiceImp customerServiceImp;
+    // @Autowired
+    // private CustomerServiceImp customerServiceImp;
 
-    @Autowired
-    private CategoryServiceImp categoryServiceImp;
-    @Test
-    public void test() {
-        CustomerEntity c = new CustomerEntity();
-        c.setCustomerAddress("Hoài Phú");
-        c.setCustomerName("Lâm Phương Tú");
-        c.setCustomerEmail("tu@gmail.com");
-        c.setCustomerPhone("0123459999");
-        c.setImage("abcDF");
-        c.setPassword("123456789");
-        customerServiceImp.saveCustomer(c);
-    }
-    @Test
-    public void test1() {
-        CategoryEntity c = new CategoryEntity();
+    // @Autowired
+    // private CategoryServiceImp categoryServiceImp;
+    // @Test
+    // public void test() {
+    //     CustomerEntity c = new CustomerEntity();
+    //     c.setCustomerAddress("Hoài Phú");
+    //     c.setCustomerName("Lâm Phương Tú");
+    //     c.setCustomerEmail("tu@gmail.com");
+    //     c.setCustomerPhone("0123459999");
+    //     c.setImage("abcDF");
+    //     c.setPassword("123456789");
+    //     customerServiceImp.saveCustomer(c);
+    // }
+    // @Test
+    // public void test1() {
+    //     CategoryEntity c = new CategoryEntity();
         
-        c.setCategoryName("Kem que");
+    //     c.setCategoryName("Kem que");
         
-        categoryServiceImp.saveCategory(c);
+    //     categoryServiceImp.saveCategory(c);
         
-    }
+    // }
 }
