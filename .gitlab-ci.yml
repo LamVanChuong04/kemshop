@@ -27,4 +27,4 @@ deploy-job:      # This job runs in the deploy stage.
     - local
   script:
     - echo "Deploying application..."
-    - echo "Successfully!"
+    - echo "Successfully! "
