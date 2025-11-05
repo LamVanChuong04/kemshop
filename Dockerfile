@@ -7,7 +7,7 @@
 
 # running
 FROM openjdk:17
-
+LABEL author="lamvanchuong"
 ARG FILE_JAR=target/*.jar
 
 ADD ${FILE_JAR} test.jar
