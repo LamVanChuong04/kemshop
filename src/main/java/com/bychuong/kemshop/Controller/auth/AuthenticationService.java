@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -63,7 +64,8 @@ public class AuthenticationService {
         );
 
         // 2. Lấy user trong DB
-        var customer = repository.findBycustomerEmail(request.getEmail());
+        var customer = repository.findByCustomerEmail(request.getEmail())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
 
         // 3. Sinh token
@@ -88,7 +90,8 @@ public class AuthenticationService {
                         request.getPassword()
                 )
         );
-        var user = repository.findBycustomerEmail(request.getEmail());
+        var user = repository.findByCustomerEmail(request.getEmail())
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         revokeAllUserTokens(user);
@@ -134,7 +137,8 @@ public class AuthenticationService {
         refreshToken = authHeader.substring(7);
         userEmail = jwtService.extractUsername(refreshToken);
         if (userEmail != null) {
-            var user = this.repository.findBycustomerEmail(userEmail);
+            var user = this.repository.findByCustomerEmail(userEmail)
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
             if (jwtService.isTokenValid(refreshToken, user)) {
                 var accessToken = jwtService.generateToken(user);
                 revokeAllUserTokens(user);

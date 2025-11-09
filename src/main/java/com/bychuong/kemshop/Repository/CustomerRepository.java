@@ -5,8 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import com.bychuong.kemshop.Entity.CustomerEntity;
 
+import java.util.Optional;
+
 @Repository
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Long> {
-    CustomerEntity findBycustomerEmail(String email);
+    Optional<CustomerEntity> findByCustomerEmail(String email);
     
 } 

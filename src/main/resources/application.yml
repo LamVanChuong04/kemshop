@@ -1,13 +1,13 @@
 openapi:
   services:
     api-docs: api-services
-    server: http://localhost:8080
+    server: http://localhost:$"{server.port}"
     title: API services
     version: v1.0.0
 ---
 spring:
   datasource:
-    url: jdbc:mysql://171.243.48.162:3306/kemshop
+    url: jdbc:mysql://localhost/kemshop
     username: root
     password: 250104
     driver-class-name: com.mysql.jdbc.Driver
